@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>github search repos</title>
+    <link rel="stylesheet" href="index.css">
+
 </head>
+
 <body>
-
-<section>
-        <div class="container">
-            <h1>Search GitHub Repository</h1>
-            <p>Enter repo name to find it!</p>
-            <div class="searchArea">
-                <label for="search">search</label>
-                <input id="search" type="text" placeholder=" Search Github Repo">
-                <button id="searchBtn" onkeydown=''>search repos</button>
-            </div>
+<div class="container">
+    <section class="form">
+        <h2>Поиск репозиториев на гитхаб</h2>
+        <div class="form-control">
+            <label for="search">Введите наименование и начните поиск</label>
+            <input id="search" type="text" placeholder=" Введите название">
+            <small>Error Message</small>
+            <button id="searchBtn" onkeydown=''>Искать!</button>
         </div>
-</section>
+    </section>
 
-<section>
-    <div class="container">
-        <div id="repoField">
 
-        </div>
-    </div>
-</section>
-
+</div>
+<div class="repo-field" id="repoField"></div>
 <script src="index.js"></script>
 
 </body>

@@ -38,11 +38,13 @@ function setReposField(res) {
     let repos = reposObj.items.splice(0, 10)
     console.log(repos)
     repos.map(item => {
-        out += `<p><a href="${item.html_url}" target="_blank">Наименование: ${item.name}</a></p>`
-        out += `<p><a href="${item.owner.html_url}" target="_blank">Автор: ${item.owner.login}</a></p>`
-        out += `<p>Описание: ${item.description}</p>`
-        out += `<p>Язык: ${item.language}</p>`
 
+        out += `<div class="result-field">
+                        <p><a href="${item.html_url}" target="_blank">Наименование: ${item.name}</a></p>
+                        <p><a href="${item.owner.html_url}" target="_blank">Автор: ${item.owner.login}</a></p>
+                        <p>Описание: ${item.description}</p>
+                        <p>Язык: ${item.language}</p>
+                </div>`
     });
 
     reposField.innerHTML = out;
