@@ -12,22 +12,28 @@ search.addEventListener('keypress', (e) => {
 searchBtn.addEventListener('click', getRepos);
 
 function getRepos() {
+    event.preventDefault();
     let searchValue = search.value;
-    if (searchValue !== "") {
-        fetch(`https://api.github.com/search/repositories?q=${searchValue}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.total_count === 0) {
-                    emptyField()
-                } else {
-                    setReposField(JSON.stringify(data))
-                }
-            })
+    cancelError(search)
+    if (searchValue.length < 5) {
+        checkLength(search);
     } else {
-        console.log('else')
-        emptySearch()
+        if (searchValue !== "") {
+            fetch(`https://api.github.com/search/repositories?q=${searchValue}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.total_count === 0) {
+                        emptyField()
+                    } else {
+                        setReposField(JSON.stringify(data))
+                    }
+                })
+        } else {
+            console.log('else')
+            emptySearch()
+        }
+        search.value = "";
     }
-    search.value = "";
 }
 
 
@@ -58,4 +64,24 @@ function emptyField() {
 function emptySearch() {
     let emptySearch = document.getElementById('repoField');
     emptySearch.innerHTML = `<p>а вы ничего и не ввели!</p>`;
+}
+
+
+function showError(input, message) {
+    const formControl = input.parentElement;
+    console.log(formControl)
+    formControl.className = 'form-control error';
+    const small = formControl.querySelector('small');
+    small.innerText = message;
+}
+
+function checkLength(input) {
+    showError(input, `Введите минимум 5 символов`);
+}
+
+function cancelError(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control small';
+    const small = formControl.querySelector('small');
+    small.innerText = '';
 }
